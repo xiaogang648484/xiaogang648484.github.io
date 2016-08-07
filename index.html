@@ -1,141 +1,617 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-    <style>
-        *{
-            margin: 0;
-            padding: 0;
-            list-style: none;
-        }
-        body{
-            background:#000;
-        }
-        html{
-            overflow: hidden;
-        }
-        ul{
-            position: relative;
-            width: 120px;
-            height: 200px;
-            margin: 100px auto;
-            transform-style:preserve-3d;
-            transform:perspective(800px) rotateX(-15deg) rotateY(0deg);
-        }
-        li{
-            position: absolute;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            box-shadow:0 0 10px #fff;
-            border-radius:10px;
-            overflow: hidden;
-            transition:1s all ease;
-            transform:rotateY(0deg) translateZ(0px);
-            -webkit-box-reflect:below 10px -webkit-linear-gradient(rgba(0,0,0,0) 50%,rgba(0,0,0,1))
-        }
-        li img{
-            width: 100%;
-            height: 100%;
-        }
-    </style>
-    <script>
-        window.onload=function(){
-            var aLi=document.querySelectorAll('li');
-            var oUl=document.querySelector('#ul1');
-            for(var i=0; i<aLi.length; i++){
-                aLi[i].style.transition='1s all ease '+200*(aLi.length-i)+'ms';
-                aLi[i].style.transform='rotateY('+360/aLi.length*i+'deg) translateZ(400px)'
-            }
-            var speedX=0;
-            var speedY=0;
-            var lastX=0;
-            var lastY=0;
-            var x=150;
-            var y=0;
-            var timer=null;
-            document.onmousedown=function(ev){
-                clearMove();
-                var disX=ev.clientX-y;
-                var disY=ev.clientY-x;
-                document.onmousemove=function(ev){
-                    y=ev.clientX-disX;
-                    x=ev.clientY-disY;
-                    if(x>600){
-                        x=600;
-                    }else if(x<-600){
-                        x=-600;
-                    }
-                    oUl.style.transform='perspective(800px) rotateX('+-x/10+'deg) rotateY('+y/10+'deg)';
-                    speedX=x-lastX;
-                    speedY=y-lastY;
-                    lastX=x;
-                    lastY=y;
-                    setOpt();
-                };
-                document.onmouseup=function(){
-                    document.onmousemove=null;
-                    document.onmouseup=null;
-
-                    clearInterval(timer);
-                    timer=setInterval(function(){
-                        x+=speedX;
-                        y+=speedY;
-                        speedX*=0.8;
-                        speedY*=0.8;
-                        if(Math.abs(speedX)<1)speedX=0;
-                        if(Math.abs(speedY)<1)speedY=0;
-                        if(speedX==0 && speedY==0)clearInterval(timer);
-                        oUl.style.transform='perspective(800px) rotateX('+-x/10+'deg) rotateY('+y/10+'deg)';
-                    },30);
-                };
-                return false;
-            };
-            aLi[0].addEventListener('transitionend',function(){
-                setMove();
-                setOpt();
-            },false);
-            function setMove(){
-                for(var i=0; i<aLi.length; i++){
-                    aLi[i].style.transition='1s all ease';
-                }
-            }
-            function clearMove(){
-                for(var i=0; i<aLi.length; i++){
-                    aLi[i].style.transition='none';
-                }
-            }
-            function setOpt(){
-                for(var i=0; i<aLi.length; i++){
-                    var d=Math.abs(360/aLi.length*i+y/10)%360;
-                    if(d>180){
-                        d=360-d;
-                    }
-                    d=(180-d)/180;
-                    if(d<0.3) d=0.3;
-                    aLi[i].style.opacity=d;
-                }
-            }
-        };
-
-    </script>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<link href="css/base.css" rel="stylesheet" />
+<style>
+*{font-family:'微软雅黑';}
+/* 顶部导航 */
+.topnav{width:1007px; height:50px; background:#f8f8f8; border-bottom:5px solid #f5a300; margin:0 auto;}
+.topnav .logo{width:104px; height:36px; margin-top:6px; margin-left:14px; border-right:1px solid #ddd; background:url(img/bg.png) no-repeat 0 -5px; text-indent:-999em;}
+.topnav li{line-height:50px; border-right:1px solid #ddd;}
+.topnav .regsiter a{ color:#333; font-size:12px; line-height:50px; padding:0 10px;}
+.topnav .regsiter a em{padding:4px 12px; background:url(img/bg2.png) no-repeat; margin-right:6px;}
+.topnav .regsiter a .one{background-position:-139px 0;}
+.topnav .regsiter a .two{background-position:-189px 0;}
+.topnav .regsiter a .three{background-position:0 -104px;}
+.topnav .service a{color:#4a4a4a; font-size:12px; padding-right:10px; padding-left:26px;}
+.topnav .service a .arrow{padding:0px 13px; background:url(img/bg2.png) no-repeat -200px -142px;}
+/*banner*/
+.banner{width:1007px; height:551px; margin:0 auto; position:relative;}
+.banner .big{width:100%; height:100%;}
+.banner .logo{position:absolute; left:0; top:0;}
+.banner .mainnav{position:absolute; right:0; top:0;}
+.banner .mainnav li{padding:36px 10px 0;}
+.banner .mainnav li a{color:#adb9e0; text-align:center;}
+.banner .mainnav li .p1{ font-size:16px; line-height:16px; margin-bottom:6px;}
+.banner .mainnav li .p2{ font-size:8px; line-height:8px;}
+.banner .mainnav li a:hover{color:#eed2bc;}
+.banner .side{width:33px; height:120px; background:#cc3810; border:1px solid #511b03; color:#fff; font-size:20px; font-weight:bold; text-align:center; line-height:24px; position:absolute; left:0; top:245px;}
+.download{width:1007px; height:110px; margin:0 auto; background:#1b1924;}
+.download .load a{width:100px; height:110px; background:url(img/sprite.jpg) no-repeat;}
+.download .load a.load1{width:216px; margin-left:4px;}
+.download .load a.load1:hover{background-position:0 -110px;}
+.download .load a.load2{background-position:-216px 0;}
+.download .load a.load2:hover{background-position:-216px -110px;}
+.download .load a.load3{background-position:-316px 0;}
+.download .load a.load3:hover{background-position:-316px -110px;}
+.download .load a.load4{background-position:-416px 0;}
+.download .load a.load4:hover{background-position:-416px -110px;}
+.download .load a.load5{background-position:-516px 0;}
+.download .load a.load5:hover{background-position:-516px -110px;}
+.download .come{width:387px; height:110px; background:#271c20;}
+.download .come .new{width:387px; height:48px; background:url(img/2.png) no-repeat center center;padding-top:18px;}
+.download .come .new p{color:#adb9e0; font-size:12px; line-height:12px; margin-bottom:10px; padding-left:110px;}
+.download .come .new p a{color:#f00015;}
+.download .come .attention{width:380px; height:44px; background:url(img/sprite.jpg) no-repeat 0 -220px;}
+.download .come .attention p{color:#adb9e0; font-size:12px; line-height:44px; padding-left:6px;}
+.download .come .attention p .num{color:#f93d1a; text-decoration:underline;}
+.download .come .attention p .add{width:14px; height:14px; background:url(img/sprite.jpg) no-repeat -603px -227px; display:inline-block;}
+.download .come .attention p em{padding-left:40px;}
+.download .come .attention p .lk{padding:13px 16px; background:url(img/sprite.jpg) no-repeat;}
+.download .come .attention p .wx{background-position:-242px -221px;}
+.download .come .attention p .wx:hover{background-position:-398px -221px;}
+.download .come .attention p .wb{background-position:-289px -221px; margin-left:10px;}
+.download .come .attention p .wb:hover{background-position:-442px -221px;}
+.download .come .attention p .tx{background-position:-337px -221px; margin-left:16px;}
+.download .come .attention p .tx:hover{background-position:-486px -221px;}
+/*菜单*/
+.menu{width:1007px; height:470px; background:url(img/bg4.jpg); margin:0 auto;}
+.menu .season{width:616px; height:303px; border:1px solid #443b4f; margin-left:4px; position:relative;}
+.menu .season a img{width:100%; height:100%; border:none;}
+.menu .season .official{width:27px; height:63px; background:url(img/6.png) no-repeat; position:absolute; left:10px; top:10px;}
+.menu .season .official:hover{background:url(img/4.png) no-repeat;}
+.menu .season .media{width:27px; height:63px; background:url(img/7.png) no-repeat; position:absolute; left:10px; top:83px;}
+.menu .season .media:hover{background:url(img/5.png) no-repeat;}
+.menu .news{width:381px; height:303px; border:1px solid #443b4f; background:#322e3f; border-left:none;}
+.menu .news .board{width:95px; height:58px; background:url(img/sprite.jpg) no-repeat; position:relative; background-position:0 -262px;}
+.menu .news .title{width:95px; height:58px; display:block; color:#fff; font-size:12px; font-weight:bold; text-align:center; line-height:58px; position:absolute; left:0; top:0;}
+.menu .news .text{width:381px; height:246px;}
+.menu .news .one .one2{position:absolute; left:0; top:58px; display:none;}
+.menu .news .text h3{width:347px; height:34px; background:url(img/sprite.jpg) no-repeat 0 -378px; margin-top:18px; margin-left:18px; color:#ff391b; font-size:16px; font-weight:bold; text-align:center; line-height:34px;}
+.menu .news .text a{color:#9ca7b8; font-size:12px; line-height:26px; padding-left:24px; padding-right:17px; display:block;}
+.menu .news .text a span{text-align:right; float:right;}
+.menu .news .text a.more{color:#9ca7ca; text-align:right;}
+.menu .news .text a.more em{padding:0 8px; background:url(img/more.jpg) no-repeat;}
+.menu .news .board:hover{background-position:0 -320px;}
+.menu .news .one:hover .one2{display:block;}
+.menu .news .two2{position:absolute; left:-95px; top:58px; display:none;}
+.menu .news .two:hover .two2{display:block;}
+.menu .news .three2{position:absolute; left:-190px; top:58px; display:none;}
+.menu .news .three:hover .three2{display:block;}
+.menu .news .four2{position:absolute; right:-1px; top:58px; display:none;}
+.menu .news .four:hover .four2{display:block;}
+.menu .problem{width:1000px; height:130px; margin-top:32px; margin-left:4px;}
+.menu .problem a{width:242px; height:130px; border:1px solid #433b4f; margin-right:8px; float:left;}
+.menu .problem a img{width:100%; height:100%; border:none;}
+.menu .problem a.last{margin-right:0;}
+/*职业介绍*/
+.intro{width:1007px; height:348px; padding-top:30px; margin:0 auto; background:#1c1a25;}
+.intro .pro{width:650px; height:346px; border:1px solid #433b4f;}
+.intro .pro .title{width:130px; height:59px; position:relative;}
+.intro .pro .title .name{width:130px; height:59px; background:url(img/sprite.jpg) no-repeat; display:block; position:absolute; left:0; top:0;}
+.intro .pro .title .pic{width:650px; height:288px; display:block;}
+.intro .pro .title a img{width:100%; height:100%;}
+.intro .pro .title .one1{background-position:0 -412px;}
+.intro .pro .title .one2{position:absolute; left:0; top:59px; display:none;}
+.intro .pro .one:hover .one1{background-position:0 -470px;}
+.intro .pro .one:hover .one2{display:block;}
+.intro .pro .title .two1{background-position:-130px -412px;}
+.intro .pro .title .two2{position:absolute; left:-130px; top:59px; display:none;}
+.intro .pro .two:hover .two1{background-position:-130px -470px;}
+.intro .pro .two:hover .two2{display:block;}
+.intro .pro .title .three1{background-position:-261px -412px;}
+.intro .pro .title .three2{position:absolute; left:-260px; top:59px; display:none;}
+.intro .pro .three:hover .three1{background-position:-261px -470px;}
+.intro .pro .three:hover .three2{display:block;}
+.intro .pro .title .four1{background-position:-392px -412px;}
+.intro .pro .title .four2{position:absolute; left:-390px; top:59px; display:none;}
+.intro .pro .four:hover .four1{background-position:-392px -470px;}
+.intro .pro .four:hover .four2{display:block;}
+.intro .pro .title .five1{background-position:-523px -412px;}
+.intro .pro .title .five2{position:absolute; right:0; top:59px; display:none;}
+.intro .pro .five:hover .five1{background-position:-523px -470px;}
+.intro .pro .five:hover .five2{display:block;}
+.intro .act{width:322px; height:348px; margin-left:26px;}
+.intro .act h3{color:#f3ca90; font-size:18px; line-height:36px; margin-bottom:10px;}
+.intro .act h3 i{padding:7px 18px; background:url(img/sprite.jpg) no-repeat -628px 0;}
+.intro .act .concern{width:320px; height:150px; border:1px solid #433b4f; position:relative; margin-bottom:10px;}
+.intro .act .concern a img{width:100%; height:100%;}
+.intro .act .concern .mask{width:320px; height:36px; background:#000; opacity:0.5; filter:alpha(opacity=50); position:absolute; left:0; bottom:0;}
+.intro .act .concern .text{width:320px; line-height:36px; font-size:12px; position:absolute; left:0; bottom:0;}
+.intro .act .concern .text i{color:#fff; foont-weight:bold;}
+.intro .act .concern .text em{width:15px; height:15px; background:url(img/14.png) no-repeat; display:inline-block; margin-left:125px;}
+.intro .act .concern .text b{color:#7c97a6;}
+.intro .act .gift{width:290px; height:25px; background:url(img/sprite.jpg) no-repeat 0 -530px; color:#a6b2d8; font-size:12px; line-height:25px; padding-left:30px; margin-bottom:3px;}
+.intro .act .gift i{float:right; margin-right:10px;}
+/*玩家交流*/
+.play{width:1007px; height:798px; padding-top:30px; margin:0 auto; background:url(img/bg3.jpg);}
+.play .left{width:215px; height:798px; margin:0 16px 0 4px;}
+.play .left .short{width:212px; height:184px; border:1px solid #585462; margin-bottom:24px;}
+.play .left .short h4{width:194px; height:40px; margin-left:10px; color:#f3ca90; font-size:16px; text-align:center; line-height:40px; border-bottom:1px solid #605969; margin-bottom:8px;}
+.play .left .short a{width:74px; color:#9587ab; font-size:12px; line-height:34px; margin-left:24px;}
+.play .left .media{width:215px; height:308px;}
+.play .left .media .area{width:205px; height:35px; border:5px solid #322b3c; color:#a295b7; font-size:16px; text-align:center; line-height:35px; display:block;}
+.play .left .media .area i{padding:1px 10px; background:url(img/sprite.jpg) no-repeat -605px -283px;}
+.play .left .survey{width:215px; height:268px; background:url(img/16.jpg) no-repeat; display:block;}
+.play .left .survey:hover{background-position:-215px 0;}
+.play .right{width:768px; height:790px;}
+.play .right .talk{width:424px; height:346px; margin-bottom:42px; margin-right:20px;}
+.play .right .talk h3{width:420px; color:#f3ca90; font-size:20px; line-height:30px; margin-bottom:10px;}
+.play .right .talk h3 i{padding:6px 24px; background:url(img/sprite.jpg) no-repeat -607px -352px;}
+.play .right .talk .box{width:106px; height:48px; position:relative;}
+.play .right .talk .box .name{width:104px; height:46px; border:1px solid #433b4f; display:block; color:#a295b7; font-size:12px; text-align:center; line-height:46px; position:absolute; left:0; top:0; z-index:1;}
+.play .right .talk .box .text{width:423px; height:256px; border:1px solid #433b4f; background:#322b3c;}
+.play .right .talk .box .text .pic{width:105px; height:197px; border:1px solid #433b4f; margin-left:15px; margin-top:23px;}
+.play .right .talk .box .text .word{color:#9587ab; font-size:12px; line-height:26px; margin-left:10px;}
+.play .right .talk .box .text .first{margin-top:20px;}
+.play .right .talk .box .one2{position:absolute; left:0; top:47px; display:none;}
+.play .right .talk .one:hover .one1{border-bottom:1px solid #322b3c; background:#322b3c; color:#fff;}
+.play .right .talk .one:hover .one2{display:block;}
+.play .right .talk .box .two2{position:absolute; left:-106px; top:47px; display:none;}
+.play .right .talk .two:hover .two1{border-bottom:1px solid #322b3c; background:#322b3c; color:#fff;}
+.play .right .talk .two:hover .two2{display:block;}
+.play .right .talk .box .three2{position:absolute; left:-212px; top:47px; display:none;}
+.play .right .talk .three:hover .three1{border-bottom:1px solid #322b3c; background:#322b3c; color:#fff;}
+.play .right .talk .three:hover .three2{display:block;}
+.play .right .talk .four{width:106px; height:48px; color:#9589a9; font-size:12px; text-align:center; line-height:46px;}
+.play .right .talk .four em{width:13px; height:13px; margin-top:17px; margin-left:20px; background:url(img/more.jpg) no-repeat;}
+.play .right .data{width:320px; height:345px; margin-bottom:42px;}
+.play .right .data h3{width:420px; color:#f3ca90; font-size:20px; line-height:30px; margin-bottom:10px;}
+.play .right .data h3 i{padding:6px 20px; background:url(img/sprite.jpg) no-repeat -628px -42px;}
+.play .right .data .game{width:300px; height:302px; background:#26212d; border:1px solid #594f67; padding-left:18px;}
+.play .right .data .game .one{width:286px; height:42px; border-bottom:1px dashed #594f67; padding-top:16px;}
+.play .right .data .game .one .p1{ color:#fff; font-size:12px; padding:0 6px; line-height:26px; margin-bottom:16px; background:#594f67;}
+.play .right .data .game .one .p2{width:190px; line-height:26px;}
+.play .right .data .game .one .p2 a{color:#9587ab;}
+.play .right .data .game .last{border-bottom:none;}
+.play .right .data .game .site{width:279px; height:39px; border:3px solid #4b3f5c; display:block; color:#b1a1ca; font-size:22px; font-weight:bold; text-align:center; line-height:40px;}
+.play .right .sina{width:424px; height:346px; margin-right:20px;}
+.play .right .sina h3{width:420px; color:#f3ca90; font-size:20px; line-height:30px; margin-bottom:10px;}
+.play .right .sina h3 i{padding:6px 24px; background:url(img/sprite.jpg) no-repeat -614px -382px;}
+.play .right .sina .box{width:106px; height:48px; position:relative;}
+.play .right .sina .box .name{width:104px; height:46px; border:1px solid #433b4f; display:block; color:#a295b7; font-size:12px; text-align:center; line-height:46px; position:absolute; left:0; top:0; z-index:1;}
+.play .right .sina .box .text{width:423px; height:256px; border:1px solid #433b4f; background:#322b3c;}
+.play .right .sina .box .text .pic{width:105px; height:197px; border:1px solid #433b4f; margin-left:15px; margin-top:23px;}
+.play .right .sina .box .text .word{color:#9587ab; font-size:12px; line-height:26px; margin-left:10px;}
+.play .right .sina .box .text .first{margin-top:20px;}
+.play .right .sina .box .one2{position:absolute; left:0; top:47px; display:none;}
+.play .right .sina .one:hover .one1{border-bottom:1px solid #322b3c; background:#322b3c; color:#fff;}
+.play .right .sina .one:hover .one2{display:block;}
+.play .right .sina .box .two2{position:absolute; left:-106px; top:47px; display:none;}
+.play .right .sina .two:hover .two1{border-bottom:1px solid #322b3c; background:#322b3c; color:#fff;}
+.play .right .sina .two:hover .two2{display:block;}
+.play .right .sina .box .three2{position:absolute; left:-212px; top:47px; display:none;}
+.play .right .sina .three:hover .three1{border-bottom:1px solid #322b3c; background:#322b3c; color:#fff;}
+.play .right .sina .three:hover .three2{display:block;}
+.play .right .sina .four{width:106px; height:48px; color:#9589a9; font-size:12px; text-align:center; line-height:46px;}
+.play .right .sina .four em{width:13px; height:13px; margin-top:17px; margin-left:20px; background:url(img/more.jpg) no-repeat;}
+.play .right .view{width:320px; height:345px; margin-bottom:42px;}
+.play .right .view h3{width:420px; color:#f3ca90; font-size:20px; line-height:30px; margin-bottom:10px;}
+.play .right .view h3 i{padding:6px 20px; background:url(img/sprite.jpg) no-repeat -623px -80px;}
+.play .right .view .box{width:106px; height:48px; position:relative;}
+.play .right .view .box .name{width:104px; height:46px; border:1px solid #433b4f; display:block; color:#a295b7; font-size:12px; text-align:center; line-height:46px; position:absolute; left:0; top:0; z-index:1;}
+.play .right .view .box .text{width:320px; height:256px; border:1px solid #433b4f; background:#322b3c;}
+.play .right .view .box .text .pic1{width:137px; height:90px; margin-left:12px; margin-top:23px;}
+.play .right .view .box .text .pic2{width:137px; height:90px; margin-left:22px; margin-top:23px;}
+.play .right .view .box .text .word{color:#9587ab; font-size:12px; line-height:26px; margin-left:10px;}
+.play .right .view .box .text .first{margin-top:20px;}
+.play .right .view .box .one2{position:absolute; left:0; top:47px; display:none;}
+.play .right .view .one:hover .one1{border-bottom:1px solid #322b3c; background:#322b3c; color:#fff;}
+.play .right .view .one:hover .one2{display:block;}
+.play .right .view .box .two2{position:absolute; left:-106px; top:47px; display:none;}
+.play .right .view .two:hover .two1{border-bottom:1px solid #322b3c; background:#322b3c; color:#fff;}
+.play .right .view .two:hover .two2{display:block;}
+.play .right .view .four{width:106px; height:48px; color:#9589a9; font-size:12px; text-align:center; line-height:46px;}
+.play .right .view .four em{width:13px; height:13px; margin-top:17px; margin-left:20px; background:url(img/more.jpg) no-repeat;}
+/*尾部*/
+.footer{width:1007px; height:130px; margin:0 auto; background:url(img/bg3.jpg); border-bottom:5px solid #8d91c7;}
+.footer .head{width:893px; height:30px; margin:0 auto 10px; background:url(img/23.jpg) no-repeat; color:#9587ab; font-size:16px; text-align:center; line-height:30px;}
+.footer .text{color:#615770; font-size:16px; text-align:center; line-height:30px;}
+/*版权*/
+.copy{width:761px; height:74px; margin:0 auto; padding-top:26px; padding-left:246px; background:url(img/24.png) no-repeat #181818; color:#535353;}
+.copy .one,.copy .one a{color:#535353; line-height:24px;}
+.copy .two{color:#767676; line-height:24px;}
+</style>
 </head>
+
 <body>
-<ul id="ul1" class="ul1">
-    <li><img src="img/1.jpg"></li>
-    <li><img src="img/2.jpg"></li>
-    <li><img src="img/3.jpg"></li>
-    <li><img src="img/4.jpg"></li>
-    <li><img src="img/5.jpg"></li>
-    <li><img src="img/6.jpg"></li>
-    <li><img src="img/7.jpg"></li>
-    <li><img src="img/8.jpg"></li>
-    <li><img src="img/9.jpg"></li>
-    <li><img src="img/10.jpg"></li>
-    <li><img src="img/11.jpg"></li>
-    <li><img src="img/12.jpg"></li>
-</ul>
+<!--顶部导航-->
+<div class="topnav clearfix">
+	<a href="#" class="logo fl">畅游</a>
+    <ul class="fr">
+    	<li class="fl regsiter">
+        	<a href="#" class="fl"><em class="one"></em>注册</a>
+            <a href="#" class="fl"><em class="two"></em>充值</a>
+            <a href="#" class="fl"><em class="three"></em>畅游+</a>
+        </li>
+        <li class="fl service">
+        	<a href="#">客服<i class="arrow"></i></a>
+        </li>
+        <li class="fl service">
+        	<a href="#">畅游全服务<i class="arrow"></i></a>
+        </li>
+        <li class="fl service">
+        	<a href="#">畅游全游戏<i class="arrow"></i></a>
+        </li>
+    </ul>
+</div>
+<!--banner-->
+<div class="banner">
+	<img class="big" src="img/1.jpg" />
+    <a href="#" class="logo"><img src="img/logo.gif" /></a>
+    <ul class="mainnav clearfix">
+    	<li class="fl">
+        	<a href="#">
+        	<p class="p1">首页</p>
+            <p class="p2">HOME</p>
+            </a>
+        </li>
+        <li class="fl"><a href="#">
+        	<p class="p1">新闻公告</p>
+            <p class="p2">NEWS</p></a>
+        </li>
+        <li class="fl"><a href="#">
+        	<p class="p1">游戏特色</p>
+            <p class="p2">FEATURES</p></a>
+        </li>
+        <li class="fl"><a href="#">
+        	<p class="p1">新手指南</p>
+            <p class="p2">NEWBIE</p></a>
+        </li>
+        <li class="fl"><a href="#">
+        	<p class="p1">游戏下载</p>
+            <p class="p2">DOWNLOAD</p></a>
+        </li>
+        <li class="fl"><a href="#">
+        	<p class="p1">活动专区</p>
+            <p class="p2">ACTIVITY</p></a>
+        </li>
+        <li class="fl"><a href="#">
+        	<p class="p1">视觉欣赏</p>
+            <p class="p2">VIDEO&PICTURE</p></a>
+        </li>
+        <li class="fl"><a href="#">
+        	<p class="p1">玩家互动</p>
+            <p class="p2">INTERACTION</p></a>
+        </li>
+        <li class="fl"><a href="#">
+        	<p class="p1">客户服务</p>
+            <p class="p2">SERVICE</p></a>
+        </li>
+    </ul>
+    <a href="#" class="side">点赞赢豪礼</a>
+</div>
+<div class="download clearfix">
+	<div class="load fl">
+        <a href="#" class="fl load1"></a>
+        <a href="#" class="fl load2"></a>
+        <a href="#" class="fl load3"></a>
+        <a href="#" class="fl load4"></a>
+        <a href="#" class="fl load5"></a>
+    </div>
+    <div class="come fl">
+    	<div class="new">
+        	<p>电信一区<a href="#">【元素殿堂】</a>欢迎进驻！</p>
+            <p>网通一区<a href="#">【雷霆之怒】</a>欢迎进驻！</p>
+        </div>
+        <div class="attention">
+        	<p>距您上次访问有<a href="#" class="num">200</a>条更新
+            	<a href="#" class="add"></a>
+            	<em>关注：</em>
+                <a href="#" class="lk wx"></a>
+                <a href="#" class="lk wb"></a>
+                <a href="#" class="lk tx"></a>
+            </p>
+        </div>
+    </div>
+</div>
+<!--菜单-->
+<div class="menu clearfix">
+	<div class="season fl">
+    	<a href="#"><img src="img/3.jpg" /></a>
+        <a href="#" class="official"></a>
+        <a href="#" class="media"></a>
+    </div>
+    <div class="news fl">
+    	<div class="board one fl">
+    		<a href="#" class="title">综合</a>
+            <div class="text one2">
+            	<h3>4月8日大版开启 新职业术士魔神天降</h3>
+                <a href="#">【综合】两大满级副本特色解密 终极多张设计曝光曝光 <span>03/24</span></a>
+                <a href="#">【综合】两大满级副本特色解密 终极boss曝光 <span>03/24</span></a>
+                <a href="#">【综合】解密术士进化史级副本特色解密 终极boss曝光 <span>03/24</span></a>
+                <a href="#">【综合】两大满级副本特色解密 终极boss曝光 <span>03/24</span></a>
+                <a href="#">【综合】两大满级副本特色解密 终极boss曝光 <span>03/24</span></a>
+                <a href="#">【综合】解密术士进化史 终极boss曝光 <span>03/24</span></a>
+                <a href="#" class="more"><em></em>更多信息></a>
+            </div>
+        </div>
+        <div class="board two fl">
+    		<a href="#" class="title">新闻</a>
+            <div class="text two2">
+            	<h3>解密术士进化史 多张设计曝光</h3>
+                <a href="#">【新闻】PVP激斗时代 终极boss曝光 <span>03/24</span></a>
+                <a href="#">【新闻】两大满级副本特色解密 终极boss曝光 <span>03/24</span></a>
+                <a href="#">【新闻】两大满级副本特色解密 终极boss曝光 <span>03/24</span></a>
+                <a href="#">【新闻】PVP激斗时代 终极boss曝光 <span>03/24</span></a>
+                <a href="#">【新闻】两大满级副本特色解密 终极boss曝光 <span>03/24</span></a>
+                <a href="#">【新闻】PVP激斗时代 终极boss曝光 <span>03/24</span></a>
+                <a href="#" class="more"><em></em>更多信息></a>
+            </div>
+        </div>
+        <div class="board three fl">
+    		<a href="#" class="title">公告</a>
+            <div class="text three2">
+            	<h3>竞技场上线 进入PVP激斗时代</h3>
+                <a href="#">【公告】大神手绘同人图放大送 终极boss曝光 <span>03/24</span></a>
+                <a href="#">【公告】两大满级副本特色解密 终极boss曝光 <span>03/24</span></a>
+                <a href="#">【公告】大神手绘同人图放大送 终极boss曝光 <span>03/24</span></a>
+                <a href="#">【公告】两大满级副本特色解密 终极boss曝光 <span>03/24</span></a>
+                <a href="#">【公告】大神手绘同人图放大送 终极boss曝光 <span>03/24</span></a>
+                <a href="#">【公告】两大满级副本特色解密 终极boss曝光 <span>03/24</span></a>
+                <a href="#" class="more"><em></em>更多信息></a>
+            </div>
+        </div>
+        <div class="board four fl">
+    		<a href="#" class="title">媒体</a>
+            <div class="text four2">
+            	<h3>萌属性报表 大神手绘同人图放大送</h3>
+                <a href="#">【媒体】两大满级副本特色解密 终极boss曝光 <span>03/24</span></a>
+                <a href="#">【媒体】解密术士进化史 终极boss曝光 <span>03/24</span></a>
+                <a href="#">【媒体】两大满级副本特色解密 终极boss曝光 <span>03/24</span></a>
+                <a href="#">【媒体】解密术士进化史 终极boss曝光 <span>03/24</span></a>
+                <a href="#">【媒体】两大满级副本特色解密 终极boss曝光 <span>03/24</span></a>
+                <a href="#">【媒体】解密术士进化史 终极boss曝光 <span>03/24</span></a>
+                <a href="#" class="more"><em></em>更多信息></a>
+            </div>
+        </div>
+    </div>
+    <div class="problem fl">
+    	<a href="#"><img src="img/8.jpg" /></a>
+        <a href="#"><img src="img/9.jpg" /></a>
+        <a href="#"><img src="img/10.jpg" /></a>
+        <a href="#" class="last"><img src="img/11.jpg" /></a>
+    </div>
+</div>
+<!--职业介绍-->
+<div class="intro clearfix">
+	<div class="pro fl">
+    	<div class="title one fl">
+        	<a href="#" class="name one1"></a>
+            <a href="#" class="pic one2"><img src="img/12.jpg" /></a>
+        </div>
+        <div class="title two fl">
+        	<a href="#" class="name two1"></a>
+            <a href="#" class="pic two2"><img src="img/3.jpg" /></a>
+        </div>
+        <div class="title three fl">
+        	<a href="#" class="name three1"></a>
+            <a href="#" class="pic three2"><img src="img/12.jpg" /></a>
+        </div>
+        <div class="title four fl">
+        	<a href="#" class="name four1"></a>
+            <a href="#" class="pic four2"><img src="img/3.jpg" /></a>
+        </div>
+        <div class="title five fl">
+        	<a href="#" class="name five1"></a>
+            <a href="#" class="pic five2"><img src="img/12.jpg" /></a>
+        </div>
+    </div>
+    <div class="act fl">
+    	<h3><i></i>活动中心</h3>
+        <div class="concern">
+        	<a href="#"><img src="img/13.jpg" /></a>
+            <div class="mask"></div>
+            <p class="text">
+                <i>女武神的秘宝</i>
+                <em></em> 
+                <b>共7294712人关注</b>
+            </p>
+        </div>
+        <p class="gift clearfix">神谕者的成长礼<i>进行中</i></p>
+        <p class="gift clearfix">每日登陆有惊喜<i>进行中</i></p>
+        <p class="gift clearfix">绑定畅游加，送十个背包<i>进行中</i></p>
+        <p class="gift clearfix">神谕者的成长礼<i>进行中</i></p>
+        <p class="gift clearfix">下载手机客户端，畅想移动互联<i>进行中</i></p>
+    </div>
+</div>
+<!--玩家交流-->
+<div class="play clearfix">
+	<div class="left fl">
+    	<div class="short clearfix">
+        	<h4 class="fl">快捷入口</h4>
+            <a href="#" class="fl">·账号管理</a>
+            <a href="#" class="fl">·加速器下载</a>
+            <a href="#" class="fl">·客户端FAQ</a>
+            <a href="#" class="fl">·用户中心</a>
+            <a href="#" class="fl">·畅游知道</a>
+            <a href="#" class="fl">·账号安全</a>
+            <a href="#" class="fl">·客户端FAQ</a>
+            <a href="#" class="fl">·客户端FAQ</a>
+        </div>
+        <div class="media">
+        	<a href="#"><img src="img/15.jpg" /></a>
+            <a href="#" class="area">媒体合作专区<i></i></a>
+        </div>
+        <a href="#" class="survey"></a>
+    </div>
+    <div class="right fl">
+    	<div class="talk fl">
+        	<h3 class="fl"><i></i>玩家交流</h3>
+            <div class="box one fl">
+            	<a href="#" class="name one1">玩家攻略</a>
+                <div class="text one2 clearfix">
+                	<a href="#" class="pic fl"><img src="img/17.jpg" /></a>
+                    <a href="#" class="word first fl">·生活技能之烹饪技能详细解读</a>
+                    <a href="#" class="word fl">·灵魂回响生活技能玩法介绍（一）</a>
+                    <a href="#" class="word fl">·生活技能之烹饪技能详细解读</a>
+                    <a href="#" class="word fl">·独家攻略！灵魂回响效率冲级攻略</a>
+                    <a href="#" class="word fl">·灵魂回响生活技能玩法介绍（二）</a>
+                    <a href="#" class="word fl">·屌丝逆袭 大神成长计划开启</a>
+                    <a href="#" class="word fl">·生活技能之烹饪技能详细解读</a>
+                    <a href="#" class="word fl">·灵魂回响生活技能玩法介绍（一）</a>
+                </div>
+            </div>
+            <div class="box two fl">
+            	<a href="#" class="name two1">论坛热帖</a>
+                <div class="text two2 clearfix">
+                	<a href="#" class="pic fl"><img src="img/18.jpg" /></a>
+                    <a href="#" class="word first fl">·灵魂回响生活技能玩法介绍（二）</a>
+                    <a href="#" class="word fl">·屌丝逆袭 大神成长计划开启</a>
+                    <a href="#" class="word fl">·生活技能之烹饪技能详细解读</a>
+                    <a href="#" class="word fl">·独家攻略！灵魂回响效率冲级攻略</a>
+                    <a href="#" class="word fl">·独家攻略！灵魂回响效率冲级攻略</a>
+                    <a href="#" class="word fl">·屌丝逆袭 大神成长计划开启</a>
+                    <a href="#" class="word fl">·生活技能之烹饪技能详细解读</a>
+                    <a href="#" class="word fl">·灵魂回响生活技能玩法介绍（一）</a>
+                </div>
+            </div>
+            <div class="box three fl">
+            	<a href="#" class="name three1">社区精华</a>
+                <div class="text three2 clearfix">
+                	<a href="#" class="pic fl"><img src="img/17.jpg" /></a>
+                    <a href="#" class="word first fl">·屌丝逆袭 大神成长计划开启</a>
+                    <a href="#" class="word fl">·独家攻略！灵魂回响效率冲级攻略</a>
+                    <a href="#" class="word fl">·生活技能之烹饪技能详细解读</a>
+                    <a href="#" class="word fl">·独家攻略！灵魂回响效率冲级攻略</a>
+                    <a href="#" class="word fl">·灵魂回响生活技能玩法介绍（二）</a>
+                    <a href="#" class="word fl">·屌丝逆袭 大神成长计划开启</a>
+                    <a href="#" class="word fl">·生活技能之烹饪技能详细解读</a>
+                    <a href="#" class="word fl">·独家攻略！灵魂回响效率冲级攻略</a>
+                </div>
+            </div>
+            <a href="#" class="four fl">
+            	<em class="fl"></em>更多信息>
+            </a>
+        </div>
+        <div class="data fl">
+        	<h3 class="fl"><i></i>游戏资料</h3>
+            <div class="game fl">
+            	<div class="one clearfix">
+                	<p class="fl p1">新手入门</p>
+                    <p class="fr p2">
+                        <a href="#" class="fl">注册账号|</a>
+                        <a href="#" class="fl">下载游戏|</a>
+                        <a href="#" class="fl">登录游戏</a>
+                    </p>
+                </div>
+                <div class="one clearfix">
+                	<p class="fl p1">职业介绍</p>
+                    <p class="fr p2">
+                        <a href="#" class="fl">刺客|</a>
+                        <a href="#" class="fl">神射手|</a>
+                        <a href="#" class="fl">守护者|</a>
+                        <a href="#" class="fl">魔法师</a>
+                    </p>
+                </div>
+                <div class="one clearfix">
+                	<p class="fl p1">旅行者日记</p>
+                    <p class="fr p2">
+                        <a href="#" class="fl">累半死|</a>
+                        <a href="#" class="fl">福尔吐司|</a>
+                        <a href="#" class="fl">和利亚纳</a>
+                    </p>
+                </div>
+                <div class="one last clearfix">
+                	<p class="fl p1">神谕者指引</p>
+                    <p class="fr p2">
+                        <a href="#" class="fl">1-19级|</a>
+                        <a href="#" class="fl">20-39级|</a>
+                        <a href="#" class="fl">40-49级</a>
+                    </p>
+                </div>
+                <a href="#" class="site">进入资料站</a>
+            </div>
+        </div>
+        <div class="sina fl">
+        	<h3 class="fl"><i></i>媒体专区</h3>
+            <div class="box one fl">
+            	<a href="#" class="name one1">17173</a>
+                <div class="text one2 clearfix">
+                	<a href="#" class="pic fl"><img src="img/17.jpg" /></a>
+                    <a href="#" class="word first fl">·生活技能之烹饪技能详细解读</a>
+                    <a href="#" class="word fl">·灵魂回响生活技能玩法介绍（一）</a>
+                    <a href="#" class="word fl">·生活技能之烹饪技能详细解读</a>
+                    <a href="#" class="word fl">·独家攻略！灵魂回响效率冲级攻略</a>
+                    <a href="#" class="word fl">·灵魂回响生活技能玩法介绍（二）</a>
+                    <a href="#" class="word fl">·屌丝逆袭 大神成长计划开启</a>
+                    <a href="#" class="word fl">·生活技能之烹饪技能详细解读</a>
+                    <a href="#" class="word fl">·灵魂回响生活技能玩法介绍（一）</a>
+                </div>
+            </div>
+            <div class="box two fl">
+            	<a href="#" class="name two1">新浪爱问</a>
+                <div class="text two2 clearfix">
+                	<a href="#" class="pic fl"><img src="img/18.jpg" /></a>
+                    <a href="#" class="word first fl">·灵魂回响生活技能玩法介绍（二）</a>
+                    <a href="#" class="word fl">·屌丝逆袭 大神成长计划开启</a>
+                    <a href="#" class="word fl">·生活技能之烹饪技能详细解读</a>
+                    <a href="#" class="word fl">·独家攻略！灵魂回响效率冲级攻略</a>
+                    <a href="#" class="word fl">·独家攻略！灵魂回响效率冲级攻略</a>
+                    <a href="#" class="word fl">·屌丝逆袭 大神成长计划开启</a>
+                    <a href="#" class="word fl">·生活技能之烹饪技能详细解读</a>
+                    <a href="#" class="word fl">·灵魂回响生活技能玩法介绍（一）</a>
+                </div>
+            </div>
+            <div class="box three fl">
+            	<a href="#" class="name three1">太平洋游戏</a>
+                <div class="text three2 clearfix">
+                	<a href="#" class="pic fl"><img src="img/17.jpg" /></a>
+                    <a href="#" class="word first fl">·屌丝逆袭 大神成长计划开启</a>
+                    <a href="#" class="word fl">·独家攻略！灵魂回响效率冲级攻略</a>
+                    <a href="#" class="word fl">·生活技能之烹饪技能详细解读</a>
+                    <a href="#" class="word fl">·独家攻略！灵魂回响效率冲级攻略</a>
+                    <a href="#" class="word fl">·灵魂回响生活技能玩法介绍（二）</a>
+                    <a href="#" class="word fl">·屌丝逆袭 大神成长计划开启</a>
+                    <a href="#" class="word fl">·生活技能之烹饪技能详细解读</a>
+                    <a href="#" class="word fl">·独家攻略！灵魂回响效率冲级攻略</a>
+                </div>
+            </div>
+            <a href="#" class="four fl">
+            	<em class="fl"></em>更多信息>
+            </a>
+        </div>
+        <div class="view fl">
+        	<h3 class="fl"><i></i>视觉欣赏</h3>
+            <div class="box one fl">
+            	<a href="#" class="name one1">游戏视频</a>
+                <div class="text one2 clearfix">
+                	<a href="#" class="pic1 fl"><img src="img/19.jpg" /></a>
+                    <a href="#" class="pic2 fl"><img src="img/20.jpg" /></a>
+                    <a href="#" class="pic1 fl"><img src="img/21.jpg" /></a>
+                    <a href="#" class="pic2 fl"><img src="img/22.jpg" /></a>
+                </div>
+            </div>
+            <div class="box two fl">
+            	<a href="#" class="name two1">游戏截图</a>
+                <div class="text two2 clearfix">
+                	<a href="#" class="pic1 fl"><img src="img/21.jpg" /></a>
+                    <a href="#" class="pic2 fl"><img src="img/19.jpg" /></a>
+                    <a href="#" class="pic1 fl"><img src="img/22.jpg" /></a>
+                    <a href="#" class="pic2 fl"><img src="img/20.jpg" /></a>
+                </div>
+            </div>
+            <a href="#" class="four fl">
+            	<em class="fl"></em>更多信息>
+            </a>
+        </div>
+        </div>
+    </div>
+</div>
+<!--尾部-->
+<div class="footer">
+	<p class="head">健康游戏公告</p>
+    <p class="text">抵制不良游戏，拒绝盗版游戏。抵制不良游戏，拒绝盗版游戏。抵制不良游戏，拒绝盗版游戏。抵制不良游戏，拒绝盗版游戏。<br/>本游戏适合18周岁以上的成年人用户，未满18周岁的未成年用户请在家长监督下进行游戏。</p>
+</div>
+<!--版权-->
+<div class="copy">
+	<p class="one">
+    北京畅游时代数码技术有限公司版权所有COPYRIGHT©2011.	CHANGYOU.COM LIMITED.ALL RIGHT RESERVED.
+    <a href="#">法律声明</a>|<a href="#">联系我们</a>
+    </p>
+    <p class="two">京网文[2011]0260-093号 | 京ICP证：070525号</p>
+</div>
 </body>
 </html>

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <script>
+        (function (win,doc){
+            var d=doc.documentElement;
+            function change(){
+                d.style.fontSize=d.clientWidth/16+'px';
+            }
+            change();
+            win.addEventListener('resize',change,false);
+        })(window,document);
+    </script>
+    <title>商品页</title>
+    <link rel="stylesheet" href="css/base.css">
+    <style>
+        header{
+            width: 16rem;
+            height:2.5rem;
+            background: url(img/headerbg.png) no-repeat;
+            background-size:100%;
+            border-top:1px solid #dcdcdc;
+        }
+        header .back{
+            float: left;
+            width: 3.175rem;
+            height: 1.55rem;
+            margin:0.5rem 0 0 0.5rem;
+            background: url(img/back.png) no-repeat;
+            background-size:100%;
+        }
+        header h1{
+            float: left;
+            width:3.7rem;
+            height:0.975rem;
+            font-size:0.8rem;
+            line-height: 0.975rem;
+            text-align: center;
+            margin-left:2.5rem;
+            margin-top:0.75rem;
+        }
+        section{
+            width: 16rem;
+            overflow: hidden;
+        }
+        .nav{
+            width: 100%;
+            height: 2rem;
+            border-bottom:1px solid #dcdcdc;
+        }
+        .nav li{
+            float: left;
+            width: 4rem;
+            height: 2rem;
+            font-size:0.55rem;
+            text-align: center;
+            line-height: 2rem;
+            color:#b2b2b2;
+            font-weight: bold;
+            border-left:1px solid #dcdcdc;
+            box-sizing:border-box;
+        }
+        .nav li:nth-child(1){
+            border-left:none;
+        }
+        .nav li:nth-child(3){
+            color:#d51942;
+        }
+        .det{
+            width: 100%;
+        }
+        .det li{
+            width: 15rem;
+            height: 5rem;
+            padding:0.75rem 0.5rem;
+            border-bottom:1px solid #dcdcdc;
+        }
+        .det li .brd{
+            float: left;
+            width: 4.25rem;
+            height: 5rem;
+            margin-right: 0.6rem;
+        }
+        .det li .det{
+            float: left;
+            width: 10rem;
+            height: 5rem;
+        }
+    </style>
+</head>
+<body>
+<header class="clearfix">
+    <a class="back" href="index.html"></a>
+    <h1>品牌团</h1>
+</header>
+<section>
+    <ul class="nav clearfix">
+        <li>商品</li>
+        <li>生活</li>
+        <li>品牌</li>
+        <li>聚宝盆</li>
+    </ul>
+    <ul class="det">
+        <li class="clearfix">
+            <img class="brd" src="img/main3_brd.jpg">
+            <img class="det" src="img/main3_det.jpg">
+        </li>
+        <li class="clearfix">
+            <img class="brd" src="img/main3_brd.jpg">
+            <img class="det" src="img/main3_det.jpg">
+        </li>
+        <li class="clearfix">
+            <img class="brd" src="img/main3_brd.jpg">
+            <img class="det" src="img/main3_det.jpg">
+        </li>
+        <li class="clearfix">
+            <img class="brd" src="img/main3_brd.jpg">
+            <img class="det" src="img/main3_det.jpg">
+        </li>
+        <li class="clearfix">
+            <img class="brd" src="img/main3_brd.jpg">
+            <img class="det" src="img/main3_det.jpg">
+        </li>
+    </ul>
+</section>
+</body>
+</html>

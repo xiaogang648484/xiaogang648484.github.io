@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="app;e-mobile-web-app-status-bar-style" content="black">
+    <script>
+        (function(win,doc){
+            var d=doc.documentElement;
+            function change(){
+                d.style.fontSize= d.clientWidth/16+'px';
+            }
+            change();
+            win.addEventListener('resize',change,false);
+        })(window,document);
+    </script>
+    <title>分类</title>
+    <link rel="stylesheet" href="css/base.css">
+    <style>
+        .kind{
+            width: 16rem;
+            height: 25rem;
+        }
+        .kind .slider{
+            float: left;
+            width: 2rem;
+            height: 25rem;
+            background: url(img/slider.png) no-repeat;
+            background-size:100%;
+        }
+        .kind .list{
+            float: left;
+            width: 14rem;
+            height: 25rem;
+            background: #333;
+        }
+        .kind .list dt{
+            float: left;
+            width: 13rem;
+            height: 2.5rem;
+            margin:0 0.5rem 0.5rem;
+            border-bottom:1px solid #404040;
+        }
+        .kind .list dt a{
+            float: left;
+            position: relative;
+            display:block;
+            width: 6.5rem;
+            color:#fff;
+            font-size: 0.65em;
+            text-align: center;
+            line-height: 2.5rem;
+        }
+        .kind .list dt a span{
+            display:block;
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            height: 0.1rem;
+            background: #fff;
+        }
+        .kind .list dd{
+            float: left;
+            width: 5.5rem;
+            height: 2rem;
+            padding-left: 1.5rem;;
+            color:#aaa;
+            font-size: 0.65rem;
+            line-height: 2rem;
+        }
+    </style>
+</head>
+<body>
+<div class="kind clearfix">
+    <a class="slider" href="main1.html"></a>
+    <dl class="list">
+        <dt>
+            <a href="javascript:;">分类<span></span></a>
+            <a href="classify2.html">地区</a>
+        </dt>
+        <dd>全部</dd>
+        <dd>摄影</dd>
+        <dd>美食</dd>
+        <dd>培训</dd>
+        <dd>休闲</dd>
+        <dd>全部</dd>
+        <dd>摄影</dd>
+        <dd>生活服务</dd>
+        <dd>培训</dd>
+        <dd>休闲</dd>
+        <dd>全部</dd>
+        <dd>摄影</dd>
+        <dd>美食</dd>
+        <dd>粮油生鲜</dd>
+        <dd>休闲</dd>
+        <dd>全部</dd>
+        <dd>摄影</dd>
+        <dd>汽车服务</dd>
+        <dd>培训</dd>
+        <dd>休闲</dd>
+    </dl>
+</div>
+</body>
+</html>

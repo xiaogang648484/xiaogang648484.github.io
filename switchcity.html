@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <script>
+        (function(win,doc){
+            var d=doc.documentElement;
+            function change(){
+                d.style.fontSize= d.clientWidth/16+'px';
+            }
+            win.addEventListener('resize',change,false);
+            change();
+        })(window,document);
+    </script>
+    <title>聚划算</title>
+    <link rel="stylesheet" href="css/base.css">
+    <style>
+        header{
+            width:16rem;
+            height: 2.5rem;
+            background: url(img/headerbg.png) no-repeat;
+            background-size:100% ;
+            border-top:1px solid #dcdcdc;
+        }
+        header div{
+            float: left;
+            width:3.175rem;
+            height:1.55rem;
+            margin:0.5rem 0 0 0.5rem;
+            background: url(img/back.png) no-repeat;
+            background-size:100%;
+        }
+        header h1{
+            float: left;
+            width:3.7rem;
+            height:0.975rem;
+            font-size:0.8rem;
+            line-height: 0.975rem;
+            text-align: center;
+            margin-left:2.5rem;
+            margin-top:0.75rem;
+        }
+        section{
+            width: 16rem;
+        }
+        .local{
+            padding-left: 1.5rem;
+            width:14.5rem;
+            height: 2.25rem;
+            background: url(img/citybg.png) no-repeat;
+            background-size:100%;
+            font-size: 0.8rem;
+            line-height: 2.25rem;
+            font-weight: bold;
+        }
+        .list{
+            width: 16rem;
+        }
+        .list dt{
+            width: 15.5rem;
+            height: 1.5rem;
+            padding-left:0.5rem;
+            font-size:0.65rem;
+            color:#999;
+            line-height: 1.5rem;
+            background: #eee;
+        }
+        .list dd{
+            width: 14.5rem;
+            height: 2.15rem;
+            padding-left:1.5rem;
+            font-size:0.75rem;
+            line-height: 2.15rem;
+            border-top:1px solid #dedede;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <div></div>
+    <h1>切换城市</h1>
+</header>
+<section>
+    <div class="local">当前位置-杭州</div>
+    <dl class="list">
+        <dt>热门城市</dt>
+        <dd>南京</dd>
+        <dd>福州</dd>
+        <dd>武汉</dd>
+        <dd>天津</dd>
+    </dl>
+    <dl class="list">
+        <dt>A</dt>
+        <dd>阿拉斯加</dd>
+        <dd>阿富汗</dd>
+        <dd>阿曼</dd>
+        <dd>啊啊啊啊</dd>
+    </dl>
+    <dl class="list">
+        <dt>B</dt>
+        <dd>伦敦</dd>
+        <dd>巴黎</dd>
+        <dd>布达佩斯</dd>
+        <dd>布拉格</dd>
+    </dl>
+</section>
+</body>
+</html>

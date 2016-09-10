@@ -2,140 +2,507 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <script>
+        (function(win,doc){
+            var d=doc.documentElement;
+            function change(){
+                d.style.fontSize= d.clientWidth/16+'px';
+            }
+            win.addEventListener('resize',change,false);
+            change();
+        })(window,document);
+    </script>
+    <title>聚划算</title>
     <style>
         *{
             margin: 0;
             padding: 0;
             list-style: none;
+            font-family:'Microsoft YaHei',sans-serif;
         }
-        body{
-            background:#000;
+        h1,h2,h3,h4,h5,h6,b{font-weight:normal;}
+        i{font-style:normal;}
+        a{text-decoration:none; color:#000;}
+        table{border-collapse:collapse;}
+        td{border:1px solid #eee; padding:0;}
+                .clearfix:after{
+                    content:'';
+                    display:block;
+                    clear:both;
+                }
+        .clearfix{
+            zoom:1;
         }
-        html{
+        header{
+            width:16rem;
+            height: 2.5rem;
+            background: url(img/headerbg.png) no-repeat;
+            background-size:100% ;
+            border-top:1px solid #dcdcdc;
+        }
+        header div{
+            float: left;
+            width:3.175rem;
+            height:1.55rem;
+            margin:0.5rem 0 0 0.5rem;
+            background: url(img/back.png) no-repeat;
+            background-size:100%;
+        }
+        header h1{
+            float: left;
+            text-indent:-99999em;
+            width:3.7rem;
+            height:0.975rem;
+            background:url(img/logo.png) no-repeat;
+            background-size:100%;
+            margin-left:2.5rem;
+            margin-top:0.75rem;
+        }
+        section{
+            width:16rem;
             overflow: hidden;
         }
-        ul{
+        .banner{
+            width: 500%;
+            height:6.7rem;
+        }
+        .banner li{
+            float: left;
+            width: 16rem;
+            height: 100%;
+            background:url(img/meiguo.png) no-repeat;
+            background-size:100%;
+        }
+        .point{
+            width:100%;
+            height: 1.25rem;
+            display:-webkit-box;
+            -webkit-box-pack:center;
+            -webkit-box-align:center;
+        }
+        .point ol li{
+            float: left;
+            width: 0.25rem;
+            height: 0.25rem;
+            border-radius:50%;
+            background:#ccc;
+            margin:0 0.125rem 0;
+        }
+        .logo-list{
+            width: 15.65rem;
+            height: 9.15rem;
+            padding-left:0.35rem;
+        }
+        .logo-list li{
+            float: left;
+            width: 2rem;
+            height: 3.5rem;
+            margin:0.5rem 0.9rem 0;
+        }
+        .logo-list img{
+            width: 100%;
+            height:2rem;
+        }
+        .logo-list p{
+            color: #999;
+            text-align: center;
+            line-height: 1rem;
+            font-size: 0.55rem;
             position: relative;
-            width: 120px;
-            height: 200px;
-            margin: 100px auto;
-            transform-style:preserve-3d;
-            transform:perspective(800px) rotateX(-15deg) rotateY(0deg);
         }
-        li{
+        .logo-list p.active:after{
+            content:'';
+            width:0.25rem;
+            height: 0.25rem;
+            border-radius:50%;
+            background:#d51938;
             position: absolute;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            box-shadow:0 0 10px #fff;
-            border-radius:10px;
-            overflow: hidden;
-            transition:1s all ease;
-            transform:rotateY(0deg) translateZ(0px);
-            -webkit-box-reflect:below 10px -webkit-linear-gradient(rgba(0,0,0,0) 50%,rgba(0,0,0,1));
+            left:-0.2rem;
+            top:0.35rem;
         }
-        li img{
+        .hot-rank{
             width: 100%;
-            height: 100%;
+        }
+        .rank-head{
+            width: 100%;
+            height: 0.75rem;
+        }
+        .rank-head span{
+            float: left;
+            width: 0.1rem;
+            height: 0.75rem;
+            background:#d51938;
+            margin-left:0.5rem;
+            display:block;
+        }
+        .rank-head h2,.rank-head p{
+            float: left;
+            font-size: 0.65rem;
+            line-height: 0.75rem;
+            margin-left:0.45rem;
+        }
+        .rank-head p{float:right; margin-right:0.5rem;}
+        .rank-bar{
+            width: 15rem;
+            height: 0.1rem;
+            background:#dcdcdc;
+            margin:0.5rem 0.5rem 0.75rem 0.5rem;
+        }
+        .rank-list{
+            width:100%;
+            padding-left:0.5rem;
+        }
+        .rank-list li{
+            width: 15rem;
+            height: 3rem;
+            margin-bottom:0.5rem;
+        }
+        .list-num,.list-pic,.list-infor,.list-price{
+            float: left;
+            height: 3rem;
+        }
+        .list-num{width:1.5rem;}
+        .list-pic{width:4.5rem;}
+        .list-infor{
+            width:4.5rem;
+            height: 2.25rem;
+            background: #f4f4f4;
+            font-size:0.6rem;
+            color: #999;
+            padding:0.75rem 0 0 0.5rem;
+        }
+        .list-infor b{color: #c7223d;}
+        .list-infor i{text-decoration: line-through;}
+        .list-price{
+            width:4rem;
+            background:url(img/pricebg.png) no-repeat;
+            background-size:100%;
+            color: #c7223d;
+            font-size: 0.65rem;
+            text-align: center;
+            line-height: 2.7rem;
+            font-weight: bold;
+        }
+        .rank-more{
+            width: 15rem;
+            height: 2rem;
+            background: #f5f5f5;
+            margin:0 0.5rem 0.5rem 0.5rem;
+            font-size: 0.7rem;
+            color: #666;
+            text-align: center;
+            line-height:2rem;
+        }
+        .group{
+            width: 15rem;
+            margin:0 0 0.5rem 0.5rem;
+        }
+        .group-pic{
+            float: left;
+            width: 3.75rem;
+            height: 8.8rem;
+        }
+        .group-table td{
+            width:3.725rem;
+            height: 2.175rem;
+            font-size:0.65rem;
+            text-align: center;
+            line-height: 2.175rem;
+            color: #999;
+        }
+        .group-table td.hot{color:#d51942;}
+        .group-bar{
+            width: 15rem;
+            margin:0 0 0.75rem 0.5rem;
+        }
+        .group-bar img{width: 100%;height: 100%;}
+        .client{
+            width: 15rem;
+            margin:0 0 0.5rem 0.5rem;
+        }
+        .client a{
+            width: 5rem;
+            height: 4rem;
+            display:block;
+            float: left;
+        }
+        .client a img{width:100%; height:100%;}
+        .help-bar{
+            width: 100%;
+            height: 2.2rem;
+            background: url(img/backtopbg.png) no-repeat;
+            background-size:100%;
+            font-size: 0.65rem;
+            line-height: 2.2rem;
+        }
+        .help-bar .log{margin-left:0.75rem;}
+        .help-bar .reg{margin-left:1.15rem;}
+        .help-bar .top{margin-left:8.15rem;}
+        footer{
+            width: 100%;
+            padding-top:1rem;
+            background: #eee;
+            display:-webkit-box;
+            -webkit-box-orient:vertical;
+            -webkit-box-align:center;
+        }
+        footer div{margin-bottom:0.75rem;}
+        footer div a{
+            display:block;
+            float: left;
+            margin-left:0.6rem;
+            font-size:0.7rem;
+            color: #333;
+        }
+        footer p{
+            margin-bottom:0.65rem;
+            font-size:0.55rem;
+            color:#999;
+        }
+        footer img{
+            width: 100%;
+            height: 4.925rem;
         }
     </style>
-    <script>
-        window.onload=function(){
-            var aLi=document.querySelectorAll('li');
-            var oUl=document.querySelector('#ul1');
-            for(var i=0; i<aLi.length; i++){
-                aLi[i].style.transition='1s all ease '+200*(aLi.length-i)+'ms';
-                aLi[i].style.transform='rotateY('+360/aLi.length*i+'deg) translateZ(400px)'
-            }
-            var speedX=0;
-            var speedY=0;
-            var lastX=0;
-            var lastY=0;
-            var x=150;
-            var y=0;
-            var timer=null;
-            document.onmousedown=function(ev){
-                clearMove();
-                var disX=ev.clientX-y;
-                var disY=ev.clientY-x;
-                document.onmousemove=function(ev){
-                    y=ev.clientX-disX;
-                    x=ev.clientY-disY;
-                    if(x>600){
-                        x=600;
-                    }else if(x<-600){
-                        x=-600;
-                    }
-                    oUl.style.transform='perspective(800px) rotateX('+-x/10+'deg) rotateY('+y/10+'deg)';
-                    speedX=x-lastX;
-                    speedY=y-lastY;
-                    lastX=x;
-                    lastY=y;
-                    setOpt();
-                };
-                document.onmouseup=function(){
-                    document.onmousemove=null;
-                    document.onmouseup=null;
-
-                    clearInterval(timer);
-                    timer=setInterval(function(){
-                        x+=speedX;
-                        y+=speedY;
-                        speedX*=0.8;
-                        speedY*=0.8;
-                        if(Math.abs(speedX)<1)speedX=0;
-                        if(Math.abs(speedY)<1)speedY=0;
-                        if(speedX==0 && speedY==0)clearInterval(timer);
-                        oUl.style.transform='perspective(800px) rotateX('+-x/10+'deg) rotateY('+y/10+'deg)';
-                    },30);
-                };
-                return false;
-            };
-            aLi[0].addEventListener('transitionend',function(){
-                setMove();
-                setOpt();
-            },false);
-            function setMove(){
-                for(var i=0; i<aLi.length; i++){
-                    aLi[i].style.transition='1s all ease';
-                }
-            }
-            function clearMove(){
-                for(var i=0; i<aLi.length; i++){
-                    aLi[i].style.transition='none';
-                }
-            }
-            function setOpt(){
-                for(var i=0; i<aLi.length; i++){
-                    var d=Math.abs(360/aLi.length*i+y/10)%360;
-                    if(d>180){
-                        d=360-d;
-                    }
-                    d=(180-d)/180;
-                    if(d<0.3) d=0.3;
-                    aLi[i].style.opacity=d;
-                }
-            }
-        };
-
-    </script>
 </head>
 <body>
-<ul id="ul1" class="ul1">
-    <li><img src="img/1.jpg"></li>
-    <li><img src="img/2.jpg"></li>
-    <li><img src="img/3.jpg"></li>
-    <li><img src="img/4.jpg"></li>
-    <li><img src="img/5.jpg"></li>
-    <li><img src="img/6.jpg"></li>
-    <li><img src="img/7.jpg"></li>
-    <li><img src="img/8.jpg"></li>
-    <li><img src="img/9.jpg"></li>
-    <li><img src="img/10.jpg"></li>
-    <li><img src="img/11.jpg"></li>
-    <li><img src="img/12.jpg"></li>
-</ul>
+<header>
+    <div></div>
+    <h1>聚划算</h1>
+</header>
+<section>
+    <ul class="banner clearfix">
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+    <div class="point">
+        <ol>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ol>
+    </div>
+    <ul class="logo-list clearfix">
+        <li><a href="main1.html"><img src="img/list1.jpg" alt="商品"><p class="active">商品</p></a></li>
+        <li><a href="main2.html"><img src="img/list2.jpg" alt="生活"><p>生活</p></a></li>
+        <li><a href="main3.html"><img src="img/list3.jpg" alt="品牌"><p>品牌</p></a></li>
+        <li><a href="main5.html"><img src="img/list4.jpg" alt="聚宝盆"><p class="active">聚宝盆</p></a></li>
+        <li><a href="main5.html"><img src="img/list5.jpg" alt="聚名品"><p>聚名品</p></a></li>
+        <li><a href="main5.html"><img src="img/list6.jpg" alt="聚家装"><p>聚家装</p></a></li>
+        <li><a href="main6.html"><img src="img/list7.jpg" alt="聚透"><p>聚透</p></a></li>
+        <li><a href="javascript:;"><img src="img/list8.jpg" alt="客户端"><p>客户端</p></a></li>
+    </ul>
+    <div class="hot-rank">
+        <div class="rank-head">
+            <span></span>
+            <h2>聚划算热卖排行</h2>
+            <p>TOP10</p>
+        </div>
+        <div class="rank-bar"></div>
+        <ul class="rank-list">
+            <li class="clearfix">
+                <img class="list-num" src="img/rank1.png">
+                <img class="list-pic" src="img/hot1.jpg" alt="hot" title="hot">
+                <div class="list-infor">
+                    <p>已售 68423</p>
+                    <p><b>2.3</b>折&nbsp;￥<i>299</i></p>
+                </div>
+                <div class="list-price">￥51</div>
+            </li>
+            <li class="clearfix">
+                <img class="list-num" src="img/rank2.png">
+                <img class="list-pic" src="img/hot2.jpg" alt="hot" title="hot">
+                <div class="list-infor">
+                    <p>已售 68423</p>
+                    <p><b>2.3</b>折&nbsp;￥<i>299</i></p>
+                </div>
+                <div class="list-price">￥51</div>
+            </li>
+            <li class="clearfix">
+                <img class="list-num" src="img/rank3.png">
+                <img class="list-pic" src="img/hot3.jpg" alt="hot" title="hot">
+                <div class="list-infor">
+                    <p>已售 68423</p>
+                    <p><b>2.3</b>折&nbsp;￥<i>299</i></p>
+                </div>
+                <div class="list-price">￥51</div>
+            </li>
+            <li class="clearfix">
+                <img class="list-num" src="img/rank4.png">
+                <img class="list-pic" src="img/hot4.jpg" alt="hot" title="hot">
+                <div class="list-infor">
+                    <p>已售 68423</p>
+                    <p><b>2.3</b>折&nbsp;￥<i>299</i></p>
+                </div>
+                <div class="list-price">￥51</div>
+            </li>
+            <li class="clearfix">
+                <img class="list-num" src="img/rank5.png">
+                <img class="list-pic" src="img/hot5.jpg" alt="hot" title="hot">
+                <div class="list-infor">
+                    <p>已售 68423</p>
+                    <p><b>2.3</b>折&nbsp;￥<i>299</i></p>
+                </div>
+                <div class="list-price">￥51</div>
+            </li>
+            <li class="clearfix">
+                <img class="list-num" src="img/rank6.png">
+                <img class="list-pic" src="img/hot6.jpg" alt="hot" title="hot">
+                <div class="list-infor">
+                    <p>已售 68423</p>
+                    <p><b>2.3</b>折&nbsp;￥<i>299</i></p>
+                </div>
+                <div class="list-price">￥51</div>
+            </li>
+            <li class="clearfix">
+                <img class="list-num" src="img/rank7.png">
+                <img class="list-pic" src="img/hot7.jpg" alt="hot" title="hot">
+                <div class="list-infor">
+                    <p>已售 68423</p>
+                    <p><b>2.3</b>折&nbsp;￥<i>299</i></p>
+                </div>
+                <div class="list-price">￥51</div>
+            </li>
+            <li class="clearfix">
+                <img class="list-num" src="img/rank8.png">
+                <img class="list-pic" src="img/hot8.jpg" alt="hot" title="hot">
+                <div class="list-infor">
+                    <p>已售 68423</p>
+                    <p><b>2.3</b>折&nbsp;￥<i>299</i></p>
+                </div>
+                <div class="list-price">￥51</div>
+            </li>
+            <li class="clearfix">
+                <img class="list-num" src="img/rank9.png">
+                <img class="list-pic" src="img/hot9.jpg" alt="hot" title="hot">
+                <div class="list-infor">
+                    <p>已售 68423</p>
+                    <p><b>2.3</b>折&nbsp;￥<i>299</i></p>
+                </div>
+                <div class="list-price">￥51</div>
+            </li>
+            <li class="clearfix">
+                <img class="list-num" src="img/rank10.png">
+                <img class="list-pic" src="img/hot10.jpg" alt="hot" title="hot">
+                <div class="list-infor">
+                    <p>已售 68423</p>
+                    <p><b>2.3</b>折&nbsp;￥<i>299</i></p>
+                </div>
+                <div class="list-price">￥51</div>
+            </li>
+        </ul>
+        <div class="rank-more">更多划算 逛起来！</div>
+    </div>
+    <div class="group clearfix">
+        <img class="group-pic" src="img/group1.jpg">
+        <table class="group-table">
+            <tbody>
+            <tr>
+                <td class="hot">服饰</td>
+                <td>配饰</td>
+                <td>美妆</td>
+            </tr>
+            <tr>
+                <td>鞋包</td>
+                <td>食品</td>
+                <td class="hot">家居</td>
+            </tr>
+            <tr>
+                <td>运动</td>
+                <td class="hot">电器</td>
+                <td>百货</td>
+            </tr>
+            <tr>
+                <td>母婴</td>
+                <td>数码</td>
+                <td>更多</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="group-bar"><img src="img/bar1.jpg"></div>
+    <div class="group clearfix">
+        <img class="group-pic" src="img/group2.jpg">
+        <table class="group-table">
+            <tbody>
+            <tr>
+                <td class="hot">美食</td>
+                <td>教育</td>
+                <td>酒店</td>
+            </tr>
+            <tr>
+                <td>电影</td>
+                <td>生活服务</td>
+                <td class="hot">卡券</td>
+            </tr>
+            <tr>
+                <td>摄影</td>
+                <td class="hot">粮油生鲜</td>
+                <td>门票</td>
+            </tr>
+            <tr>
+                <td>休闲娱乐</td>
+                <td></td>
+                <td></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="group-bar"><img src="img/bar2.jpg"></div>
+    <div class="group clearfix">
+        <img class="group-pic" src="img/group3.jpg">
+        <table class="group-table">
+            <tbody>
+            <tr>
+                <td>七匹狼</td>
+                <td class="hot">粉红女...</td>
+                <td>卓诗尼</td>
+            </tr>
+            <tr>
+                <td class="hot">收纳博士</td>
+                <td>惠氏</td>
+                <td>夏乐</td>
+            </tr>
+            <tr>
+                <td>帕克伦</td>
+                <td>古今</td>
+                <td class="hot">九牧</td>
+            </tr>
+            <tr>
+                <td>诺奥</td>
+                <td>红豆</td>
+                <td>曼秀雷敦</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="group-bar"><img src="img/bar3.jpg"></div>
+    <div class="client clearfix">
+        <a href="javascript:;"><img src="img/client1.jpg" alt="IOS"></a>
+        <a href="javascript:;"><img src="img/client2.jpg" alt="安卓"></a>
+        <a href="javascript:;"><img src="img/client3.jpg" alt="意见反馈"></a>
+    </div>
+    <div class="help-bar">
+        <a class="log" href="javascript:;">登录</a>
+        <a class="reg" href="javascript:;">注册</a>
+        <a class="top" href="javascript:;">TOP</a>
+    </div>
+</section>
+<footer>
+    <div>
+        <a href="javascript:;">标准版</a>
+        <a href="javascript:;">电脑版</a>
+    </div>
+    <p>©2013 浙B2-20080224&nbsp;&nbsp;服务中心</p>
+    <img src="img/addmenu.jpg" alt="添加到桌面">
+</footer>
 </body>
 </html>

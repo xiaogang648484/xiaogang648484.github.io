@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <script>
+        (function (win,doc){
+            var d=doc.documentElement;
+            function change(){
+                d.style.fontSize=d.clientWidth/16+'px';
+            }
+            change();
+            win.addEventListener('resize',change,false);
+        })(window,document);
+    </script>
+    <title>聚透</title>
+    <link rel="stylesheet" href="css/base.css">
+    <style>
+        header{
+            width: 16rem;
+            height:2.5rem;
+            background: url(img/headerbg.png) no-repeat;
+            background-size:100%;
+            border-top:1px solid #dcdcdc;
+        }
+        header .back{
+            float: left;
+            width: 3.175rem;
+            height: 1.55rem;
+            margin:0.5rem 0 0 0.5rem;
+            background: url(img/back.png) no-repeat;
+            background-size:100%;
+        }
+        header h1{
+            float: left;
+            width:3.7rem;
+            height:0.975rem;
+            font-size:0.8rem;
+            line-height: 0.975rem;
+            text-align: center;
+            margin-left:2.5rem;
+            margin-top:0.75rem;
+        }
+        section{
+            width: 16rem;
+            overflow: hidden;
+        }
+        .det{
+            width: 100%;
+        }
+        .det li{
+            width: 100%;
+            height: 4rem;
+            padding:0.5rem;
+            border-bottom:1px solid #dcdcdc;
+        }
+        .det li img{
+            float: left;
+            width: 6rem;
+            height: 4rem;
+            margin-right: 0.6rem;
+        }
+        .det .name{
+            float: left;
+            width: 7.5rem;
+            height: 1.6rem;
+            font-size:0.65rem;
+            line-height: 0.8rem;
+            overflow: hidden;
+            font-weight: bold;
+        }
+        .det .price{
+            float: left;
+            width: 7.5rem;
+            height: 1rem;
+            font-size:0.5rem;
+            line-height: 0.8rem;
+            font-weight: bold;
+            margin-top:0.5rem;
+        }
+        .det .price span{
+            color:#d51942;
+        }
+        .det .price span em{font-size:0.6rem;}
+        .det .price span b{font-size:0.8rem; font-weight:bold;}
+        .det .buy{
+            float: left;
+            width: 5rem;
+            height: 1rem;
+            font-size:0.5rem;
+            line-height: 1rem;
+            font-weight: bold;
+            color:#999;
+            text-decoration:line-through;
+        }
+        .det .group{
+            float: left;
+            width: 2.5rem;
+            height: 0.75rem;
+            background: url(img/main6_group.jpg) no-repeat;
+            background-size:100%;
+        }
+    </style>
+</head>
+<body>
+<header class="clearfix">
+    <a class="back" href="index.html"></a>
+    <h1>聚透</h1>
+</header>
+<section>
+    <ul class="det">
+        <li class="clearfix">
+            <img src="img/main1_det.jpg">
+            <p class="name">新田园，林下散养草鸡蛋 40枚 纯天然无污染</p>
+            <p class="price"><span><em>￥</em><b>51</b>.00&nbsp;&nbsp;&nbsp;</span></p>
+            <p class="buy">￥96.00</p>
+            <div class="group"></div>
+        </li>
+        <li class="clearfix">
+            <img src="img/main1_det.jpg">
+            <p class="name">新田园，林下散养草鸡蛋 40枚 纯天然无污染</p>
+            <p class="price"><span><em>￥</em><b>51</b>.00&nbsp;&nbsp;&nbsp;</span></p>
+            <p class="buy">￥96.00</p>
+            <div class="group"></div>
+        </li>
+        <li class="clearfix">
+            <img src="img/main1_det.jpg">
+            <p class="name">新田园，林下散养草鸡蛋 40枚 纯天然无污染</p>
+            <p class="price"><span><em>￥</em><b>51</b>.00&nbsp;&nbsp;&nbsp;</span></p>
+            <p class="buy">￥96.00</p>
+            <div class="group"></div>
+        </li>
+        <li class="clearfix">
+            <img src="img/main1_det.jpg">
+            <p class="name">新田园，林下散养草鸡蛋 40枚 纯天然无污染</p>
+            <p class="price"><span><em>￥</em><b>51</b>.00&nbsp;&nbsp;&nbsp;</span></p>
+            <p class="buy">￥96.00</p>
+            <div class="group"></div>
+        </li>
+        <li class="clearfix">
+            <img src="img/main1_det.jpg">
+            <p class="name">新田园，林下散养草鸡蛋 40枚 纯天然无污染</p>
+            <p class="price"><span><em>￥</em><b>51</b>.00&nbsp;&nbsp;&nbsp;</span></p>
+            <p class="buy">￥96.00</p>
+            <div class="group"></div>
+        </li>
+    </ul>
+</section>
+</body>
+</html>

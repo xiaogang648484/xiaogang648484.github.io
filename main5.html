@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <script>
+        (function (win,doc){
+            var d=doc.documentElement;
+            function change(){
+                d.style.fontSize=d.clientWidth/16+'px';
+            }
+            change();
+            win.addEventListener('resize',change,false);
+        })(window,document);
+    </script>
+    <title>聚宝盆</title>
+    <link rel="stylesheet" href="css/base.css">
+    <style>
+        header{
+            width: 16rem;
+            height:2.5rem;
+            background: url(img/headerbg.png) no-repeat;
+            background-size:100%;
+            border-top:1px solid #dcdcdc;
+        }
+        header .back{
+            float: left;
+            width: 3.175rem;
+            height: 1.55rem;
+            margin:0.5rem 0 0 0.5rem;
+            background: url(img/back.png) no-repeat;
+            background-size:100%;
+        }
+        header h1{
+            float: left;
+            width:3.7rem;
+            height:0.975rem;
+            font-size:0.8rem;
+            line-height: 0.975rem;
+            text-align: center;
+            margin-left:2.5rem;
+            margin-top:0.75rem;
+        }
+        section{
+            width: 16rem;
+            overflow: hidden;
+        }
+        .nav{
+            width: 100%;
+            height: 2rem;
+            border-bottom:1px solid #dcdcdc;
+        }
+        .nav li{
+            float: left;
+            width: 4rem;
+            height: 2rem;
+            font-size:0.55rem;
+            text-align: center;
+            line-height: 2rem;
+            color:#b2b2b2;
+            font-weight: bold;
+            border-left:1px solid #dcdcdc;
+            box-sizing:border-box;
+        }
+        .nav li:nth-child(1){
+            border-left:none;
+        }
+        .nav li:nth-child(4){
+            color:#d51942;
+        }
+        .banner{
+            width: 100%;
+            height: 5.7rem;
+        }
+        .banner li img{
+            width: 16rem;
+            height: 5.7rem;
+        }
+        .point{
+            width: 100%;
+            height: 1rem;
+            display:-webkit-box;
+            -webkit-box-pack:center;
+            -webkit-box-align:center;
+            border-bottom:1px solid #dcdcdc;
+        }
+        .point li{
+            float: left;
+            width: 0.2rem;
+            height: 0.2rem;
+            border-radius:50%;
+            margin:0 0.15rem;
+            background: #333;
+        }
+        .det{
+            width: 100%;
+        }
+        .det li{
+            width: 100%;
+            height: 4rem;
+            border-bottom:1px solid #dcdcdc;
+            background: url(img/main5_bg.png) no-repeat;
+            background-size:100%;
+        }
+        .det li img{
+            float: left;
+            width: 4rem;
+            height: 4rem;
+        }
+        .det li h2{
+            float: left;
+            width: 12rem;
+            height: 1rem;
+            padding-top: 1rem;
+            color:#6a237f;
+            font-size: 0.85rem;
+            font-weight: bold;
+            line-height: 0.85rem;
+        }
+        .det li p{
+            float: left;
+            width: 12rem;
+            height: 1.6rem;
+            padding-top: 0.4rem;
+            color:#999;
+            font-size: 0.6rem;
+            line-height: 0.6rem;
+        }
+    </style>
+</head>
+<body>
+<header class="clearfix">
+    <a class="back" href="index.html"></a>
+    <h1>聚宝盆</h1>
+</header>
+<section>
+    <ul class="nav clearfix">
+        <li>商品</li>
+        <li>生活</li>
+        <li>品牌</li>
+        <li>聚宝盆</li>
+    </ul>
+    <ul class="banner">
+        <li><img src="img/main5_ban.jpg"></li>
+    </ul>
+    <div class="point">
+        <ul class="clearfix">
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+    </div>
+    <ul class="det">
+        <li class="clearfix">
+            <img src="img/main5_det.jpg">
+            <h2>聚名品</h2>
+            <p>轻奢购物第一站</p>
+        </li>
+        <li class="clearfix">
+            <img src="img/main5_det.jpg">
+            <h2>聚名品</h2>
+            <p>轻奢购物第一站</p>
+        </li>
+        <li class="clearfix">
+            <img src="img/main5_det.jpg">
+            <h2>聚名品</h2>
+            <p>轻奢购物第一站</p>
+        </li>
+    </ul>
+</section>
+</body>
+</html>
